@@ -1,0 +1,41 @@
+services:
+  web:
+    # image: ghcr.io/barbecue23/project-management-system:latest
+    image: test:latest
+    container_name: web
+    networks:
+      - management_system_network
+    environment: 
+      db_host: db:5432
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    depends_on:
+      - POSTGRES_DBdoc
+    restart: unless-stopped
+    command: >
+      sh -c "bin/rails db:migrate && bundle exec puma -C config/puma.rb"
+
+  POSTGRES_DBdoc:
+    image: postgres:15
+    ports:
+      - "5432:5432" 
+    container_name: POSTGRES_DB
+    networks:
+      - management_system_network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: management_system
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+networks:
+  management_system_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
