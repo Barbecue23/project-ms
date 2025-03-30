@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddPublishDateToNews < ActiveRecord::Migration[7.0]
   def change
     add_column :news, :publish_date, :datetime

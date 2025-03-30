@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MapPermission < ApplicationRecord
   belongs_to :role
   belongs_to :permission

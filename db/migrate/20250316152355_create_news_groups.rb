@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateNewsGroups < ActiveRecord::Migration[7.0]
   def change
     create_table :news_groups do |t|
