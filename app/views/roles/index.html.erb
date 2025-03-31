@@ -1,0 +1,33 @@
+<div class="form">
+  <!-- Header -->
+  <div class="form-header">
+    <h1 class="page-title">สิทธิ์การใช้งาน (Roles)</h1>
+    <%= link_to '+ เพิ่ม Role ใหม่', new_role_path, class: "btn-create" %>
+  </div>
+
+  <!-- Table -->
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ชื่อสิทธิ์</th>
+          <th>จำนวนผู้ใช้</th>
+          <th>Permissions</th>
+          <th>การจัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @roles.each do |role| %>
+          <tr>
+            <td><%= role.name %></td>
+            <td><%= role.users.count %></td>
+            <td><%= role.permissions.count %></td>
+            <td>
+              <%= link_to 'แก้ไข', edit_role_path(role), class: "btn btn-primary" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="form">
+  <div class="form-header">
+    <h1 class="page-title">จัดการรอบการศึกษา</h1>
+    <%= link_to 'สร้างรอบใหม่', new_season_path, class: "btn-create" %>
+  </div>
+
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ชื่อรอบ</th>
+          <th>รายละเอียด</th>
+          <th>วันที่เริ่ม</th>
+          <th>วันที่สิ้นสุด</th>
+          <th style="display=flex;"colspan="2">การกระทำ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @seasons.each do |season| %>
+          <tr>
+            <td><%= season.season_name %></td>
+            <td>
+              <% season.seasons_detail.each do |detail| %>
+                <% season_info = detail.values.first %>
+                <p>ปี <%= season_info["year"] %> เทอม <%= season_info["term"] %></p>
+              <% end %>
+            </td>
+            <td><%= season.start_date.strftime("%d/%m/%Y") %></td>
+            <td><%= season.end_date.strftime("%d/%m/%Y") %></td>
+            <td>
+              <%= link_to 'แก้ไข', edit_season_path(id: season.id), class: "btn btn-primary" %>
+            </td>
+            <td>
+              <%= link_to 'ลบ', season_path(season), data: { turbo_method: :delete, turbo_confirm: "คุณแน่ใจหรือไม่ว่าต้องการลบ?" }, class: "btn btn-delete" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
