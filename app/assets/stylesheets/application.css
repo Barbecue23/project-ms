@@ -51,6 +51,11 @@ body {
   text-decoration: #888888;
 }
 
+.btn-secondary:hover {
+  background-color: #888888;
+  color: #ffffff;
+}
+
 .btn-delete {
   background-color: #fcdede;
   color: #c62828;
